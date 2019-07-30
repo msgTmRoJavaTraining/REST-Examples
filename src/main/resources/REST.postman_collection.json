@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "1ae92c3f-27fa-415c-a59f-4209cf909613",
-		"name": "REST Examples",
+		"_postman_id": "dfbca9ab-b6e2-4833-abce-e3d67640841b",
+		"name": "REST",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -10,7 +10,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
 				"url": {
 					"raw": "http://localhost:8080/RESTExamples/rest/count",
 					"protocol": "http",
@@ -32,9 +31,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/RESTExamples/rest/insert/1",
+					"raw": "http://localhost:8080/RESTExamples/rest/user/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -43,7 +41,7 @@
 					"path": [
 						"RESTExamples",
 						"rest",
-						"insert",
+						"user",
 						"1"
 					]
 				}
@@ -55,9 +53,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/RESTExamples/rest/insertQuery?numberOfEntries=2",
+					"raw": "http://localhost:8080/RESTExamples/rest/users?salary=2000",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -66,12 +63,12 @@
 					"path": [
 						"RESTExamples",
 						"rest",
-						"insertQuery"
+						"users"
 					],
 					"query": [
 						{
-							"key": "numberOfEntries",
-							"value": "2"
+							"key": "salary",
+							"value": "2000"
 						}
 					]
 				}
@@ -92,15 +89,19 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "numberOfEntries",
-							"value": "3",
-							"description": "",
+							"key": "firstName",
+							"value": "Alex",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Stoica",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/RESTExamples/rest/insertForm",
+					"raw": "http://localhost:8080/RESTExamples/rest/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -109,25 +110,36 @@
 					"path": [
 						"RESTExamples",
 						"rest",
-						"insertForm"
+						"create"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "POST - CookieParam",
+			"name": "Put - Update",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "firstName",
+							"value": "Andrei",
+							"type": "text"
+						}
+					]
+				},
 				"url": {
-					"raw": "http://localhost:8080/RESTExamples/rest/insertCookie",
+					"raw": "http://localhost:8080/RESTExamples/rest/update",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -136,7 +148,34 @@
 					"path": [
 						"RESTExamples",
 						"rest",
-						"insertCookie"
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete - QueryParam",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/RESTExamples/rest/delete?userId=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RESTExamples",
+						"rest",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "5"
+						}
 					]
 				}
 			},

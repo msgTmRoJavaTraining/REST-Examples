@@ -2,7 +2,6 @@ package group.msg.examples.rest;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
 @Path("/rest")
@@ -18,37 +17,36 @@ public class RestBean {
   }
 
   @GET
-  @Path("insert/{numberOfEntries}")
-  public String insertPathParam(@PathParam("numberOfEntries") int numberOfEntries) {
-    logger.info("Adding entries using path parameters.");
-    return "Added " + numberOfEntries + " entries";
+  @Path("user/{userId}")
+  public String getPathParam(@PathParam("userId") int userId) {
+    logger.info("Getting a user using a path param");
+    return "user with id "+userId;
   }
 
   @GET
-  @Path("insertQuery")
-  public String insertQueryParam(@QueryParam("numberOfEntries") int numberOfEntries) {
-    logger.info("Adding entries using query parameters.");
-    return "Added " + numberOfEntries + " entries";
+  @Path("users")
+  public String getQueryParam(@QueryParam("salary") int salary) {
+    logger.info("Getting using query parameters.");
+    return "Found 5 programmers with the salary "+salary;
   }
 
   @POST
-  @Path("insertForm")
-  public String insertPostRequest(@FormParam("numberOfEntries") int numberOfEntries) {
-    logger.info("Adding entries using post request.");
-    return "Added " + numberOfEntries + " entries";
+  @Path("create")
+  public String insertPostRequest(@FormParam("firstName") String firstName,@FormParam("lastName") String lastName) {
+    logger.info("Creating a user using the body");
+    return "Created user with firstName: "+firstName +"\n and lastName: "+lastName;
   }
 
-  @POST
-  @Path("insertCookie")
-  public String insertCookieRequest(@CookieParam("numberOfEntries") int numberOfEntries) {
-    logger.info("Adding entries using cookies request.");
-    return "Added " + numberOfEntries + " entries";
+  @PUT
+  @Path("update")
+  public String updateFirstName(@FormParam("firstName") String firstName,
+                       @FormParam("id") int id) {
+    return "Updated the firstName for user with the id "+id;
   }
-
   @DELETE
   @Path("delete")
-  public String delete(@QueryParam("entryId") int entryId) {
-    return "Deleted entry with id: " + entryId;
+  public String delete(@QueryParam("userId") int userId) {
+    return "Deleted user with id: " + userId;
   }
 
 }
