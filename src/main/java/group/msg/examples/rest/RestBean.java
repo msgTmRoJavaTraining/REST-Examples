@@ -1,6 +1,9 @@
 package group.msg.examples.rest;
 
 import group.msg.ejb.DatabaseEJB;
+import group.msg.ejb.DatabaseUserEJB;
+import group.msg.entities.User;
+import org.glassfish.config.support.Delete;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -13,54 +16,49 @@ public class RestBean {
     private Logger logger;
 
     @Inject
-    private DatabaseEJB databaseEJB;
+    private DatabaseUserEJB databaseUserEJB;
 
-    @GET
-    @Path("count")
-    public String count() {
-        return "Count something";
-    }
 
-    @GET
-    @Path("user/{userId}")
-    public String getPathParam(@PathParam("userId") int userId) {
-        logger.info("Getting a user using a path param");
-        return "user with id " + userId;
-    }
-
-    @GET
-    @Path("users")
-    public String getQueryParam(@QueryParam("salary") int salary) {
-        logger.info("Getting using query parameters.");
-        return "Found 5 programmers with the salary " + salary;
-    }
 
     @POST
     @Path("create")
-    public String insertPostRequest(@FormParam("firstName") String firstName, @FormParam("lastName") String lastName) {
-        logger.info("Creating a user using the body");
-        return "Created user with firstName: " + firstName + "\n and lastName: " + lastName;
+    public String createNewDog(@QueryParam("name")String name,@QueryParam("Salary")int salary) {
+        databaseUserEJB.insertUser(name,salary);
+        return "Success!";
+    }
+
+    @GET
+    @Path("getId")
+    public String getUserbyId(@QueryParam("id")int id) {
+        User user = databaseUserEJB.findUser(id);
+        return "User " + user;
     }
 
     @PUT
     @Path("update")
-    public String updateFirstName(@FormParam("firstName") String firstName,
-                                  @FormParam("id") int id) {
-        return "Updated the firstName for user with the id " + id;
+    public String updateUserName(@FormParam("name")String name,String replacebleName,@FormParam("id")int id){
+
+        User user = databaseUserEJB.findUser(id);
+        user.setName(replacebleName);
+        return "updated";
     }
 
     @DELETE
-    @Path("delete")
-    public String delete(@QueryParam("userId") int userId) {
-        return "Deleted user with id: " + userId;
+    @Path("deleteRecord")
+    public String deleteById(@QueryParam("id")int id){
+
+
+        databaseUserEJB.deleteUser(id);
+
+        return "succes";
     }
 
-
     @GET
-    @Path("dog")
-    public String createNewDog(@QueryParam("name")String name) {
-        databaseEJB.insertDog(name);
-        return "Success!";
+    @Path("display")
+    public String returnUsersAbove(@QueryParam("salary")int salary){
+
+        return  databaseUserEJB.returnUsers(2000);
+
     }
 
 }
