@@ -11,8 +11,7 @@ public class RestApplication extends Application {
   @Override
   public Set<Class<?>> getClasses() {
     final Set<Class<?>> classes = new HashSet<>();
-    classes.add(RestBean.class);
-
+    classes.add(PersonBean.class);
     return classes;
   }
 }
