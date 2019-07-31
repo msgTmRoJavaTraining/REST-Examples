@@ -1,18 +1,20 @@
-package group.msg.entities;
+package group.msg.exercise;
 
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
 @Data
-public class Dog {
+@Entity
+public class User {
     @GeneratedValue
     @Id
-    private int id;
+    private int userId;
 
+    private int salary;
     private String name;
+
+
 }
