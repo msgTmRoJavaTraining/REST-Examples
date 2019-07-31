@@ -5,6 +5,7 @@ import group.msg.ejb.DatabaseEJB;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Path("/myrest")
@@ -53,8 +54,15 @@ public class MyRestBean
     @Path("delete")
     public String delete(@QueryParam("userId") int userId)
     {
-        databaseEJB.deteleRecord(userId);
+        databaseEJB.deleteRecord(userId);
         return "Deleted user with id: " + userId;
     }
 
+
+    @GET
+    @Path("users")
+    public String getQueryParam(@QueryParam("age") int age) {
+
+        return databaseEJB.numberOfUsers(age);
+    }
 }
