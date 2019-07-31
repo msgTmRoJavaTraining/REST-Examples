@@ -12,7 +12,7 @@ public class RestApplication extends Application {
   public Set<Class<?>> getClasses() {
     final Set<Class<?>> classes = new HashSet<>();
     classes.add(RestBean.class);
-
+    classes.add(MyRestBean.class);
     return classes;
   }
 }

@@ -18,7 +18,7 @@ public class RestBean {
     @GET
     @Path("count")
     public String count() {
-        return "Count something";
+        return "Count something now!";
     }
 
     @GET
